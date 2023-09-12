@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Scripts : MonoBehaviour
+public class WaterSpawner : MonoBehaviour
 {
     public GameObject waterPrefab;
     public float spawnTime = 1.0f;
