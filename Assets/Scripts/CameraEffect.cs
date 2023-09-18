@@ -4,16 +4,16 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class CameraEffect : MonoBehaviour
 {
-	public Material material;
+	public Material Material;
 
 	private void OnRenderImage(RenderTexture source, RenderTexture destination)
 	{
-		if (material == null)
+		if (Material == null)
 		{
 			Graphics.Blit(source, destination);
 			return;
 		}
 
-		Graphics.Blit(source, destination, material);
+		Graphics.Blit(source, destination, Material);
 	}
 }

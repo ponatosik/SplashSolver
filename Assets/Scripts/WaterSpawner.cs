@@ -4,40 +4,40 @@ using UnityEngine;
 
 public class WaterSpawner : MonoBehaviour
 {
-    public GameObject waterPrefab;
-    public float spawnTime = 1.0f;
-    public int maxObjects = 10;
+    public GameObject WaterPrefab;
+    public float SpawnTime = 1.0f;
+    public int MaxObjects = 10;
 
-    private List<GameObject> spawnedObjects = new List<GameObject>();
-    private bool stopSpawning = false;
-    private Vector3 initialPosition;
+    private List<GameObject> _spawnedObjects = new List<GameObject>();
+    private bool _stopSpawning = false;
+    private Vector3 _initialPosition;
 
     // Use this for initialization
     void Start()
     {
-        initialPosition = transform.position;
-        StartCoroutine(waterWave());
+        _initialPosition = transform.position;
+        StartCoroutine(WaterWave());
     }
 
-    private void spawnWater(Vector3 position)
+    private void SpawnWater(Vector3 position)
     {
-        if (!stopSpawning && spawnedObjects.Count < maxObjects)
+        if (!_stopSpawning && _spawnedObjects.Count < MaxObjects)
         {
-            GameObject water = Instantiate(waterPrefab, position, Quaternion.identity);
-            spawnedObjects.Add(water);
+            GameObject water = Instantiate(WaterPrefab, position, Quaternion.identity);
+            _spawnedObjects.Add(water);
         }
-        else if (spawnedObjects.Count >= maxObjects)
+        else if (_spawnedObjects.Count >= MaxObjects)
         {
-            stopSpawning = true;
+            _stopSpawning = true;
         }
     }
 
-    IEnumerator waterWave()
+    IEnumerator WaterWave()
     {
-        while (!stopSpawning)
+        while (!_stopSpawning)
         {
-            yield return new WaitForSeconds(spawnTime);
-            spawnWater(initialPosition);
+            yield return new WaitForSeconds(SpawnTime);
+            SpawnWater(_initialPosition);
         }
     }
 }

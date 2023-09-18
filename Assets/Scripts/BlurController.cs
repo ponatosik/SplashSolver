@@ -5,12 +5,12 @@ using UnityEngine;
 public class BlurController : MonoBehaviour
 {
     [Header("Blue Settings")]
-    public int iterations = 3;                   // Blur iterations - larger number means more blur.
-    public float blurSpread = 0.6f;              // Blur spread for each iteration. Lower values give better looking blur.
-    static Material m_Material = null;
-    protected Material material { get { if (m_Material == null) { m_Material = new Material(blurShader) { hideFlags = HideFlags.DontSave }; } return m_Material; } }
+    public int Iterations = 3;                   // Blur iterations - larger number means more blur.
+    public float BlurSpread = 0.6f;              // Blur spread for each iteration. Lower values give better looking blur.
+    static Material _material = null;
+    protected Material Material { get { if (_material == null) { _material = new Material(BlurShader) { hideFlags = HideFlags.DontSave }; } return _material; } }
 
-    public Shader blurShader = null;             // The blur iteration shader just takes 4 texture samples and averages them.
+    public Shader BlurShader = null;             // The blur iteration shader just takes 4 texture samples and averages them.
                                                  // By applying it repeatedly and spreading out sample locations
                                                  // we get a Gaussian blur approximation.
 
@@ -18,8 +18,8 @@ public class BlurController : MonoBehaviour
     // Performs one blur iteration.
     public void FourTapCone(RenderTexture source, RenderTexture dest, int iteration)
     {
-        float off = 0.5f + iteration * blurSpread;
-        Graphics.BlitMultiTap(source, dest, material,
+        float off = 0.5f + iteration * BlurSpread;
+        Graphics.BlitMultiTap(source, dest, Material,
                                new Vector2(-off, -off),
                                new Vector2(-off, off),
                                new Vector2(off, off),
@@ -30,7 +30,7 @@ public class BlurController : MonoBehaviour
     private void DownSample4x(RenderTexture source, RenderTexture dest)
     {
         float off = 1.0f;
-        Graphics.BlitMultiTap(source, dest, material,
+        Graphics.BlitMultiTap(source, dest, Material,
                                new Vector2(-off, -off),
                                new Vector2(-off, off),
                                new Vector2(off, off),
@@ -48,7 +48,7 @@ public class BlurController : MonoBehaviour
         DownSample4x(source, buffer);
 
         // Blur the small texture
-        for (int i = 0; i < iterations; i++)
+        for (int i = 0; i < Iterations; i++)
         {
             RenderTexture buffer2 = RenderTexture.GetTemporary(rtW, rtH, 0);
             FourTapCone(buffer, buffer2, i);
