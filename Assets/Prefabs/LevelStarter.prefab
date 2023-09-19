@@ -268,9 +268,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8363daf2c462d443b2ab2aa6e7e233b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterPrefab: {fileID: 7213674925657164873, guid: 369f4174775084141b5be73537372ebd, type: 3}
-  spawnTime: 0.5
-  maxObjects: 20
+  WaterPrefab: {fileID: 7213674925657164873, guid: 369f4174775084141b5be73537372ebd, type: 3}
+  SpawnTime: 0.2
+  MaxObjects: 40
 --- !u!1 &3757750275075250129
 GameObject:
   m_ObjectHideFlags: 0
